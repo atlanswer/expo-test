@@ -1,17 +1,19 @@
 import { Image } from "expo-image";
-import { Link } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 // @ts-expect-error: No type for image import
 import PlaceHolderImage from "@/assets/images/background-image.png";
 import Button from "@/components/Button";
+import { useState } from "react";
 
 export default function Index() {
+  const [selectedImage, setSelectedImage] = useState<string | undefined>();
+
   return (
     <View style={style.container}>
       <View style={style.imageContainer}>
-        <Image source={PlaceHolderImage} style={style.image} />
+        <Image source={selectedImage ?? PlaceHolderImage} style={style.image} />
       </View>
-      <Button label="Open An Image" />
+      <Button label="Open An Image" setSelectedImage={setSelectedImage} />
     </View>
   );
 }
